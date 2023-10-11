@@ -53,6 +53,7 @@ export default function Grading() {
       .map((r) => `${r.description}: ${r.points} points`)
       .join(", ");
 
+    console.log("Sending to GPT:", text, rubricsString, totalScore);
     try {
       const response = await fetch("/api/grade", {
         method: "POST",
@@ -77,6 +78,8 @@ export default function Grading() {
       });
 
       const data = await response.json();
+
+      console.log("GPT response:", data);
 
       const gptResponse = data.choices[0].message.content.trim();
 
@@ -133,8 +136,8 @@ export default function Grading() {
   };
 
   return (
-    <div className="bg-neutral-950 min-h-screen flex flex-col justify-center items-center text-white">
-      <h1 className="text-4xl mb-8">iGrader - Student Interface</h1>
+    <div className="bg-neutral-950 min-h-screen flex flex-col justify-center items-center text-white py-28">
+      <h1 className="text-5xl mt-20 mb-20">iGrader - Student Interface</h1>
 
       <div className="flex w-full max-w-6xl mb-8">
         <div className="rubrics-container w-1/2 pr-8">
