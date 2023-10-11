@@ -1,6 +1,7 @@
 body {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
     margin: 0;
     padding: 0;
 }
@@ -9,14 +10,12 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .title {
     text-align: center;
-    color: #333333;
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -26,48 +25,41 @@ body {
 label {
     display: block;
     margin-bottom: 5px;
-    color: #333333;
 }
 
-input[type="number"],
-textarea,
-button {
+input[type="number"], textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     font-size: 16px;
+    background-color: #2E2E2E;
+    border: 1px solid #333333;
+    color: #FFFFFF;
+    margin-top: 5px;
 }
 
 button {
-    background-color: #4CAF50;
-    color: #ffffff;
+    background-color: #007BFF;
+    color: #FFFFFF;
     border: none;
+    padding: 10px 20px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
-}
-
-.rubrics-container {
-    margin-bottom: 30px;
-}
-
-.result-container {
-    margin-top: 30px;
+    background-color: #0056b3;
 }
 
 .loading-icon {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #333333;
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #CCCCCC;
+    border-top-color: #007BFF;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 2s linear infinite;
     margin: 0 auto;
-    margin-top: 20px;
+    animation: spin 1s infinite linear;
 }
 
 @keyframes spin {
@@ -75,9 +67,14 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
-.footer {
+.result-container {
     margin-top: 20px;
-    text-align: center;
-    color: #333333;
 }
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+}
+
 

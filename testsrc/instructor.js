@@ -1,35 +1,25 @@
-/**
- * @author fullmoonemptysun 10.10.23
- */
+document.addEventListener('DOMContentLoaded', () => {
+    const setRubricBtn = document.getElementById('setRubricBtn');
 
-
-function setRubricPoints() {
-    const rubrics = [];
-
-    for (let i = 1; i <= 4; i++) {
-        const rubricDesc = document.getElementById(`rubric${i}Desc`).value;
-        const rubricPoints = parseInt(document.getElementById(`rubric${i}`).value);
-        if (rubricDesc && !isNaN(rubricPoints)) {
-            rubrics.push({ description: rubricDesc, points: rubricPoints });
+    setRubricBtn.addEventListener('click', () => {
+        const rubrics = [];
+        for (let i = 1; i <= 4; i++) {
+            const description = document.getElementById(`rubric${i}Desc`).value;
+            const points = parseInt(document.getElementById(`rubric${i}Points`).value);
+            if (description && !isNaN(points)) {
+                rubrics.push({ description, points });
+            }
         }
-    }
 
-    const totalScore = parseInt(document.getElementById('totalScore').value);
-    
-
-    localStorage.setItem('rubrics', JSON.stringify(rubrics));
-    localStorage.setItem('totalScore', totalScore);
-    
-
-    const rubricsList = document.getElementById('rubricsList');
-    rubricsList.innerHTML = "<h3>Rubrics:</h3>";
-    rubrics.forEach(rubric => {
-        rubricsList.innerHTML += `<p>${rubric.description}: ${rubric.points} points</p>`;
+        const totalScore = parseInt(document.getElementById('totalScore').value);
+        // Send rubrics and total score to student interface
+        updateStudentInterface(rubrics, totalScore);
+        alert('Rubrics and total score set successfully!');
     });
 
-    const totalScoreDisplay = document.getElementById('totalScoreDisplay');
-    totalScoreDisplay.textContent = totalScore;
-    
-    alert("Rubric Points Set Successfully!");
-}
-
+    function updateStudentInterface(rubrics, totalScore) {
+        
+        localStorage.setItem('rubrics', JSON.stringify(rubrics));
+        localStorage.setItem('totalScore', totalScore);
+    }
+});
