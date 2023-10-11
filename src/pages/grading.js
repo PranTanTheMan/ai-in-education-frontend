@@ -4,16 +4,11 @@ import OpenAI from "openai";
 
 // import "../styles/styles.css";
 
-export default function grading() {
+export default function Grading() {
   const [rubrics, setRubrics] = useState([]);
   const [totalScore, setTotalScore] = useState(0);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState({});
-
-  const openai = new OpenAI({
-    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true,
-  });
 
   useEffect(() => {
     setRubrics(JSON.parse(localStorage.getItem("rubrics")) || []);
@@ -59,23 +54,31 @@ export default function grading() {
       .join(", ");
 
     try {
-      const response = await openai.chat.completions.create({
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a grading assistant. Based on the rubrics provided and the content of the text, provide a score and feedback. Format your response as 'Score: XX points. Feedback: ...'.",
-          },
-          {
-            role: "user",
-            content: `The rubrics are: ${rubricsString}. The total score is ${totalScore}.`,
-          },
-          { role: "user", content: text },
-        ],
-        model: "gpt-4",
+      const response = await fetch("/api/grade", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a grading assistant. Based on the rubrics provided and the content of the text, provide a score and feedback. Format your response as 'Score: XX points. Feedback: ...'.",
+            },
+            {
+              role: "user",
+              content: `The rubrics are: ${rubricsString}. The total score is ${totalScore}.`,
+            },
+            { role: "user", content: text },
+          ],
+          model: "gpt-4",
+        }),
       });
 
-      const gptResponse = response.choices[0].message.content.trim();
+      const data = await response.json();
+
+      const gptResponse = data.choices[0].message.content.trim();
 
       // Extract score
       const scoreMatch = gptResponse.match(/Score: (\d+) points/);
@@ -135,9 +138,9 @@ export default function grading() {
 
       <div className="flex w-full max-w-6xl mb-8">
         <div className="rubrics-container w-1/2 pr-8">
-          <h2 className="text-2xl mb-4">Rubrics and Scores</h2>
+          <h2 className="text-2xl mb-4">Rubric and Scores</h2>
           <div id="rubricsList" className="mb-4">
-            <h3 className="text-xl mb-2">Rubrics:</h3>
+            <h3 className="text-xl mb-2">Rubric:</h3>
             {rubrics.map((rubric) => (
               <p key={rubric.description} className="mb-1">
                 {rubric.description}:{" "}
@@ -158,13 +161,14 @@ export default function grading() {
         <div className="result-container w-1/2 pl-8 border-l-2 border-white">
           <h2 className="text-2xl mb-4">Grading Result:</h2>
           {result.score && (
-            <p>
+            <p className="text-xl">
               Score: <span className="font-bold">{result.score}</span>
             </p>
           )}
           {result.feedback && (
-            <p className="mt-2">
-              Feedback: <span className="font-italic">{result.feedback}</span>
+            <p className="mt-6">
+              <span className="font-bold ">Feedback:</span>{" "}
+              <span className="font-italic">{result.feedback}</span>
             </p>
           )}
         </div>
@@ -172,7 +176,7 @@ export default function grading() {
 
       <form
         id="grading-form"
-        className="w-full max-w-3xl mb-8"
+        className="w-full mb-8 pl-96"
         onSubmit={handleGradeSubmission}
       >
         <div className="form-group mb-4">
@@ -188,16 +192,28 @@ export default function grading() {
             className="bg-white text-black p-2 rounded"
           />
         </div>
-        <button
-          type="submit"
-          id="gradeBtn"
-          className="px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors"
-        >
-          Grade Document
-        </button>
-      </form>
 
-      {loading && <div className="loading-icon"></div>}
+        {loading ? (
+          <div className="inline-block align-middle">
+            <span
+              className="animate-spin absolute h-12 w-12 border-t-2 border-transparent border-solid rounded-full"
+              style={{
+                borderTopColor: "green",
+                borderWidth: "3px",
+              }}
+            ></span>
+          </div>
+        ) : (
+          <button
+            type="submit"
+            id="gradeBtn"
+            className="px-4 py-2 rounded bg-gradient-to-br from-green-600 from-40% to-green-400 transition-colors"
+            disabled={loading}
+          >
+            Grade Document
+          </button>
+        )}
+      </form>
 
       <div className="gpt-response w-full max-w-3xl"></div>
     </div>

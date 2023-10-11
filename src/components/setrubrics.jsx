@@ -67,7 +67,7 @@ function SetRubrics() {
         </div>
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-800"
+          className="w-full bg-gradient-to-br from-green-600 from-40% to-green-400 text-white p-2 rounded hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-800"
         >
           Set Rubrics
         </button>

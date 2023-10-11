@@ -2,6 +2,7 @@ import { FiMenu, FiArrowUpRight } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import { useAnimate, motion } from "framer-motion";
 import { Router } from "next/router";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -94,7 +95,6 @@ const Links = () => (
   <div className="hidden items-center gap-2 md:flex">
     <GlassLink text="Home" link="/" />
     <GlassLink text="Teacher Dashboard" link="/dashboard" />
-    <GlassLink text="Team" link="/team" />
   </div>
 );
 
@@ -122,11 +122,11 @@ const TextLink = ({ text, link }) => {
 
 const Buttons = ({ setMenuOpen }) => (
   <div className="flex items-center gap-4">
-    <a href="/grading">
+    <Link href="/grading">
       <button className="relative scale-100 overflow-hidden rounded-lg bg-gradient-to-br from-green-600 from-40% to-green-400 px-4 py-2 font-medium text-white transition-transform hover:scale-105 active:scale-95">
         Submit Assignment
       </button>
-    </a>
+    </Link>
 
     <button
       onClick={() => setMenuOpen((pv) => !pv)}
@@ -150,7 +150,6 @@ const MobileMenu = ({ menuOpen }) => {
         <div className="flex items-center gap-4">
           <TextLink text="Home" link="/" />
           <TextLink text="Teacher Dashboard" link="/dashboard" />
-          <TextLink text="Team" link="/team" />
         </div>
       </div>
     </motion.div>

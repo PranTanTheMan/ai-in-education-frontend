@@ -56,7 +56,7 @@ export default function Home() {
         </h1>
         <p className="mb-6 mt-4 max-w-4xl text-center text-lg font-normal text-neutral-500 md:text-2xl">
           An automated grading system for teachers to use Tesseract OCR and
-          GPT-4 to grade students' work.
+          GPT-4 to grade students&apos; work.
         </p>
         <div className="flex gap-5">
           <button
@@ -73,7 +73,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div>hellow rolds</div>
     </div>
   );
 }
