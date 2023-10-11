@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "^10.16.4",
     "next": "13.5.4",
+    "openai": "^4.11.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "tesseract.js": "^5.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10",
