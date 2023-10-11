@@ -15,15 +15,12 @@ function setRubricPoints() {
     }
 
     const totalScore = parseInt(document.getElementById('totalScore').value);
+    
+
     localStorage.setItem('rubrics', JSON.stringify(rubrics));
     localStorage.setItem('totalScore', totalScore);
-    alert("Rubric Points Set Successfully!");
-
     
-    updateStudentInterface(rubrics, totalScore);
-}
 
-function updateStudentInterface(rubrics, totalScore) {
     const rubricsList = document.getElementById('rubricsList');
     rubricsList.innerHTML = "<h3>Rubrics:</h3>";
     rubrics.forEach(rubric => {
@@ -32,5 +29,7 @@ function updateStudentInterface(rubrics, totalScore) {
 
     const totalScoreDisplay = document.getElementById('totalScoreDisplay');
     totalScoreDisplay.textContent = totalScore;
+    
+    alert("Rubric Points Set Successfully!");
 }
 
