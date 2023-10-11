@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grader - Student</title>
+    <link href="./style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">iGrader - Student Interface</h1>
+        <div class="rubrics-container">
+            <h2>Rubrics and Scores</h2>
+            <div id="rubricsList"></div>
+            <div>
+                <label for="totalScoreDisplay">Total Score Set by Instructor: </label>
+                <span id="totalScoreDisplay"></span>
+            </div>
+        </div>
+        <form id="grading-form">
+            <div class="form-group">
+                <label for="file">Upload Document</label>
+                <input type="file" id="file" accept="image/*" required>
+            </div>
+            <button type="submit">Grade Document</button>
+        </form>
+        <div class="loading-icon"></div>
+        <div class="result-container"></div>
+        <div class="gpt-response"></div>
+        <footer class="footer">Designed by <a href="https://github.com/fullmoonemptysun">fullmoonemptysun</a></footer>
+    </div>
+
+    <script src="./student.js"></script>
+</body>
+
+</html>
+
+
+    <script src="./student.js"></script>
+</body>
+
+</html>
